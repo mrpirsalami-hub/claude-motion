@@ -8,7 +8,9 @@
     "render:reel": "remotion render Reel out/reel.mp4",
     "render:tutorial": "remotion render Tutorial out/tutorial.mp4",
     "still:reel": "remotion still Reel out/reel.png --frame=60",
-    "still:tutorial": "remotion still Tutorial out/tutorial.png --frame=60"
+    "still:tutorial": "remotion still Tutorial out/tutorial.png --frame=60",
+    "render:ai": "remotion render AIRevolution out/ai-revolution.mp4",
+    "still:ai": "remotion still AIRevolution out/ai.png --frame=300"
   },
   "repository": {
     "type": "git",

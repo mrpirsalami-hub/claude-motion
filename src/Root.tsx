@@ -2,9 +2,20 @@ import React from "react";
 import { Composition } from "remotion";
 import { Intro } from "./scenes/Intro";
 import { FPS } from "./theme";
+import { AIRevolution } from "./ai/AIRevolution";
+import { DURATIONS } from "./ai/tokens";
 
 export const Root: React.FC = () => (
   <>
+    {/* 16:9 motion graphic, 60 seconds: "AI Revolution" */}
+    <Composition
+      id="AIRevolution"
+      component={AIRevolution}
+      width={1920}
+      height={1080}
+      fps={FPS}
+      durationInFrames={DURATIONS.reduce((a, b) => a + b, 0)}
+    />
     {/* 9:16 Instagram Reel, 30 seconds */}
     <Composition
       id="Reel"
