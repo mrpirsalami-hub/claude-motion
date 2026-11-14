@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "remotion studio",
     "typecheck": "tsc --noEmit",
+    "bgm:generate": "python3 scripts/generate_bgm.py",
+    "render:ai-reel": "npm run bgm:generate && remotion render AIMotionReel out/ai-motion-reel.mp4",
     "render:reel": "remotion render Reel out/reel.mp4",
     "render:tutorial": "remotion render Tutorial out/tutorial.mp4",
     "still:reel": "remotion still Reel out/reel.png --frame=60",
