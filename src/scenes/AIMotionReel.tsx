@@ -9,7 +9,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { colors, FPS, fontFamily } from "../theme";
+import { FPS, fontFamily } from "../theme";
 
 type SceneData = {
   id: string;
