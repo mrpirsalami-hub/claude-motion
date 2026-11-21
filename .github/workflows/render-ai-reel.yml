@@ -1,0 +1,63 @@
+name: Render AI Motion Reel
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - "remotion.config.ts"
+      - ".github/workflows/render-ai-reel.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-ai-motion-reel
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Generate original soundtrack
+        run: python3 scripts/generate_bgm.py
+
+      - name: Ensure Remotion browser
+        run: npx remotion browser ensure
+
+      - name: Render vertical AI motion reel
+        run: npx remotion render AIMotionReel out/ai-motion-reel.mp4 --codec=h264
+
+      - name: Upload rendered MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-motion-reel
+          path: out/ai-motion-reel.mp4
+          if-no-files-found: error
+          retention-days: 14
